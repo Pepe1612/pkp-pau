@@ -1,43 +1,62 @@
 package pack;
 
-import java.util.ArrayList;
-import java.util.List;
+import containers.ArrivalsContainer;
 
-public class TrainStation {
+import java.util.Objects;
 
-    private String name;
-    private List<Arrival> arrivals;
+public class TrainStation implements Comparable<TrainStation>{
+
+    private final ArrivalsContainer arrivalsContainer;
+    private String townName;
     private int maxCapacity;
-    private int[] hours = new int[24];
+    private final int id;
 
-    public TrainStation(String name, int maxCapacity) {
-        this.name = name;
+    public TrainStation(String townName, int maxCapacity, int id) {
+        arrivalsContainer = new ArrivalsContainer(this);
+        this.townName = townName;
         this.maxCapacity = maxCapacity;
-        this.arrivals = new ArrayList<>(1);
+        this.id = id;
     }
 
-    public void addArrival(Arrival arrival) {
-        if(hours[arrival.getTime().getHour()] < this.maxCapacity) {
-            arrivals.add(arrival);
-            hours[arrival.getTime().getHour()]++;
-        } else
-            System.err.println("Station " + this.name + " is full!");
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TrainStation that = (TrainStation) o;
+        return Objects.equals(townName, that.townName);
     }
 
-    public void getArrivals() {
-        for(int i = 0; i< arrivals.size(); i++) {
-            if(this.arrivals.get(i).getDelay() == Delay.ONTIME)
-                System.out.println("TRAIN" + (i+1) + "." + arrivals.get(i));
-            else
-                System.out.println("TRAIN" + (i+1) + "." + arrivals.get(i) + "  DELAYED");
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hash(townName);
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public int compareTo(TrainStation o) {
+        return this.getTownName().compareTo(o.getTownName());
+    }
+
+    public String getTownName() {
+        return townName;
     }
 
     public int getMaxCapacity() {
         return maxCapacity;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public ArrivalsContainer getArrivals() {
+        return arrivalsContainer;
+    }
+
+    public void setTownName(String townName) {
+        this.townName = townName;
+    }
+
+    public void setMaxCapacity(int maxCapacity) {
+        this.maxCapacity = maxCapacity;
     }
 }

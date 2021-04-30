@@ -7,7 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="pkp" />
+        <module name="pkp-pau" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="pkp" target="16" />
+    </bytecodeTargetLevel>
   </component>
 </project>

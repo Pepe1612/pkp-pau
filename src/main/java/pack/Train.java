@@ -1,105 +1,74 @@
 package pack;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import containers.PassengersContainer;
 
-public class Train implements Comparable<Train>{
+import java.util.Objects;
+
+public class Train {
 
     private String name;
-    private int numberOfSeats;
-    private List<Commodity> commodities;
+    private PassengersContainer passengers;
     private Delay delay;
+    private int id;
 
-    public Train(String name, int numberOfSeats) {
+    public Train(String name, int numberOfSeats, int id) {
         this.name = name;
-        this.numberOfSeats = numberOfSeats;
-        this.commodities = new ArrayList<>(1);
-        delay = Delay.ONTIME;
+        this.passengers = new PassengersContainer(this, numberOfSeats);
+        this.delay = Delay.ONTIME;
+        this.id = id;
     }
 
-    public void addCommodity(Commodity comm) {
-        commodities.add(comm);
+    @Override
+    public String toString() {
+        return "pack.Train{" + "\n" +
+                ", name='" + name +
+                ", delay=" + delay +
+                '}';
     }
 
-    public void getCommodity() {
-        for(int i = 0; i<commodities.size(); i++) {
-            System.out.println((i+1) + "." + commodities.get(i));
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Train train = (Train) o;
+        return Objects.equals(name, train.name) && delay == train.delay;
     }
 
-    public void getSortedAscendingCommodity() {
-        commodities.sort(new Comparator<Commodity>() {
-            @Override
-            public int compare(Commodity o1, Commodity o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        });
-        this.getCommodity();
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 
-    public void getSortedDescendingCommodity() {
-        commodities.sort(new Comparator<Commodity>() {
-            @Override
-            public int compare(Commodity o1, Commodity o2) {
-                return -1 * o1.getName().compareTo(o2.getName());
-            }
-        });
-        this.getCommodity();
+    public String getName() {
+        return name;
     }
 
-    public Commodity getOldestCommodity() {
-        Commodity oldest = Collections.max(commodities, new Comparator<Commodity>() {
-            @Override
-            public int compare(Commodity o1, Commodity o2) {
-                return Integer.compare(o1.getAge(), o2.getAge());
-            }
-        });
-        return oldest;
-    }
-
-    public void changeCommodity(int numberOfCommodity, int newAmount) {
-        this.commodities.get(numberOfCommodity-1).setAmount(newAmount);
-        this.delay = Delay.DELAYED;
-    }
-
-    public void deleteCommodity() {
-        this.commodities.removeAll(commodities);
-        this.delay = Delay.DELAYED;
-    }
-
-    public boolean findCommodities(String name) {
-        for (Commodity commodity : commodities) {
-            if (name.equals(commodity.getName())) return true;
-        }
-        return false;
-    }
-
-    public int numberOfCommodities(String name) {
-        int counter = 0;
-        for (Commodity commodity : commodities) {
-            if (commodity.getName().equals(name)) counter++;
-        }
-        return counter;
-    }
-
-    public void setDelay(Delay delay) {
-        this.delay = delay;
+    public PassengersContainer getPassengers() {
+        return passengers;
     }
 
     public Delay getDelay() {
         return delay;
     }
 
-    @Override
-    public int compareTo(Train o) {
-        return Integer.compare(this.numberOfSeats, o.numberOfSeats);
+    public int getId() {
+        return id;
     }
 
-    @Override
-    public String toString() {
-        return "Name:" + this.name;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPassengers(PassengersContainer passengers) {
+        this.passengers = passengers;
+    }
+
+    public void setDelay(Delay delay) {
+        this.delay = delay;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
 
