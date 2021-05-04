@@ -36,6 +36,11 @@ public class TrainStation implements Comparable<TrainStation>{
         return this.getTownName().compareTo(o.getTownName());
     }
 
+    @Override
+    public String toString() {
+        return "ID:" + id + " - TownName:" + townName;
+    }
+
     public String getTownName() {
         return townName;
     }

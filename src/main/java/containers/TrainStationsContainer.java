@@ -1,5 +1,6 @@
 package containers;
 
+import pack.Train;
 import pack.TrainStation;
 import java.util.Map;
 import java.util.TreeMap;
@@ -42,5 +43,14 @@ public class TrainStationsContainer implements IContainer<TrainStation> {
     @Override
     public boolean contains(TrainStation object) {
         return trainStations.containsValue(object);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder tmp = new StringBuilder();
+        for(Map.Entry<Integer, TrainStation> entry : trainStations.entrySet()) {
+            tmp.append("ID: ").append(entry.getKey()).append(", Town name: ").append(entry.getValue().getTownName()).append("\n");
+        }
+        return tmp.toString();
     }
 }

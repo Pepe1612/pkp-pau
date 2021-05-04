@@ -20,10 +20,7 @@ public class Train {
 
     @Override
     public String toString() {
-        return "pack.Train{" + "\n" +
-                ", name='" + name +
-                ", delay=" + delay +
-                '}';
+        return "ID:" + id + " - Name:" + name;
     }
 
     @Override
