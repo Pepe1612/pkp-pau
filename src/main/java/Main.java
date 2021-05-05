@@ -13,8 +13,11 @@ public class Main {
 
         trainsContainer.makeTrain("Hetman", 100);
         trainsContainer.makeTrain("Lubomirski", 200);
+        trainsContainer.makeTrain("Slazak", 150);
 
-        trainStationsContainer.makeTrainStation("Kraków", 1000);
+        trainStationsContainer.makeTrainStation("Krakow", 5);
+        trainStationsContainer.makeTrainStation("Rzeszow", 3);
+        trainStationsContainer.makeTrainStation("Warszawa", 10);
 
         JFrame adminFrame = new JFrame("Admin Panel");
         adminFrame.setContentPane(new AdminMenu(trainsContainer, trainStationsContainer).getMainPanel());

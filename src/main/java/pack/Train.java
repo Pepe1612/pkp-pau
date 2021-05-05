@@ -9,10 +9,12 @@ public class Train {
     private String name;
     private PassengersContainer passengers;
     private Delay delay;
+    private int numberOfSeats;
     private int id;
 
     public Train(String name, int numberOfSeats, int id) {
         this.name = name;
+        this.numberOfSeats = numberOfSeats;
         this.passengers = new PassengersContainer(this, numberOfSeats);
         this.delay = Delay.ONTIME;
         this.id = id;
@@ -46,6 +48,10 @@ public class Train {
 
     public Delay getDelay() {
         return delay;
+    }
+
+    public int getNumberOfSeats() {
+        return numberOfSeats;
     }
 
     public int getId() {

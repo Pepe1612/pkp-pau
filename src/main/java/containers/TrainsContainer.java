@@ -3,7 +3,6 @@ package containers;
 import pack.Train;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class TrainsContainer implements IContainer<Train> {
     private final Map<Integer, Train> trains;
@@ -43,6 +42,22 @@ public class TrainsContainer implements IContainer<Train> {
     @Override
     public boolean contains(Train object) {
         return trains.containsKey(object.getId());
+    }
+
+    public boolean contains(int key) {
+        return trains.containsKey(key);
+    }
+
+    public int size() {
+        return trains.size();
+    }
+
+    public int getIdCounter() {
+        return idCounter;
+    }
+
+    public Map<Integer, Train> getTrains() {
+        return trains;
     }
 
     @Override

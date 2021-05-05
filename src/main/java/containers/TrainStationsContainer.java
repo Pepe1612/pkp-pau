@@ -22,7 +22,7 @@ public class TrainStationsContainer implements IContainer<TrainStation> {
 
     @Override
     public boolean add(TrainStation trainStation) {
-        if(!trainStations.containsKey(trainStation.getId())) {
+        if(!trainStations.containsValue(trainStation)) {
             trainStations.put(trainStation.getId(), trainStation);
             idCounter++;
             return true;
@@ -43,6 +43,22 @@ public class TrainStationsContainer implements IContainer<TrainStation> {
     @Override
     public boolean contains(TrainStation object) {
         return trainStations.containsValue(object);
+    }
+
+    public boolean contains(int key) {
+        return trainStations.containsKey(key);
+    }
+
+    public int size() {
+        return trainStations.size();
+    }
+
+    public int getIdCounter() {
+        return idCounter;
+    }
+
+    public Map<Integer, TrainStation> getTrainStations() {
+        return trainStations;
     }
 
     @Override
